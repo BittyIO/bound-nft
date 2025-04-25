@@ -61,7 +61,9 @@ export const verifyEtherscanContract = async (
       relatedSources: true,
     };
     await runTaskWithRetry("verify:verify", params, times, msDelay, cleanup);
-  } catch (error) {}
+  } catch (error) {
+    console.error("[ETHERSCAN][ERROR] Fatal error detected", error.message);
+  }
 };
 
 export const runTaskWithRetry = async (
@@ -73,7 +75,6 @@ export const runTaskWithRetry = async (
 ) => {
   let counter = times;
   await delay(msDelay);
-
   try {
     if (times > 1) {
       await DRE.run(task, params);

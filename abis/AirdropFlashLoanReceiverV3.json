@@ -279,19 +279,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "claimRegistry",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "uint256[]",
@@ -443,19 +430,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getVersion",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -464,7 +438,7 @@
       },
       {
         "internalType": "address",
-        "name": "claimRegistry_",
+        "name": "bnftRegistry_",
         "type": "address"
       }
     ],

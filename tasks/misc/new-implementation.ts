@@ -5,7 +5,6 @@ import {
   deployAirdropFlashLoanReceiverV3Impl,
   deployBNFTRegistry,
   deployGenericBNFTImpl,
-  deployUserFlashclaimRegistryV3,
 } from "../../helpers/contracts-deployments";
 
 task("dev:deploy-new-implementation", "Deploy new implementation")
@@ -32,10 +31,5 @@ task("dev:deploy-new-implementation", "Deploy new implementation")
     if (contract == "AirdropFlashLoanReceiverV3") {
       const newImpl = await deployAirdropFlashLoanReceiverV3Impl(verify);
       console.log("AirdropFlashLoanReceiverV3 implementation address:", newImpl.address);
-    }
-
-    if (contract == "UserFlashclaimRegistryV3") {
-      const newImpl = await deployUserFlashclaimRegistryV3(verify);
-      console.log("UserFlashclaimRegistryV3 implementation address:", newImpl.address);
     }
   });

@@ -1,99 +1,82 @@
 {
-  "CryptoPunksMarket": {
-    "address": "0x554309B0888c37139D6E31aBAe30B4502915B5DB",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
-  },
-  "WrappedPunk": {
-    "address": "0x647dc527Bd7dFEE4DD468cE6fC62FC50fa42BD8b",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
-  },
-  "WPUNKS": {
-    "address": "0x647dc527Bd7dFEE4DD468cE6fC62FC50fa42BD8b",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
-  },
-  "MintableERC721": {
-    "address": "0xBE4CC856225945ea80460899ff2Fbf0143358550",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
-  },
-  "BAYC": {
-    "address": "0xE15A78992dd4a9d6833eA7C9643650d3b0a2eD2B",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
-  },
-  "DOODLE": {
-    "address": "0x28cCcd47Aa3FFb42D77e395Fba7cdAcCeA884d5A",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
-  },
-  "MAYC": {
-    "address": "0xD0ff8ae7E3D9591605505D3db9C33b96c4809CDC",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
-  },
-  "CLONEX": {
-    "address": "0x3BD0A71D39E67fc49D5A6645550f2bc95F5cb398",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
-  },
-  "AZUKI": {
-    "address": "0x292F693048208184320C01e0C223D624268e5EE7",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
-  },
-  "SDOODLE": {
-    "address": "0xd51fC3376F6D7C86D8639d5ec238327ab0EE69e3",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
-  },
   "ProxyAdmin": {
-    "address": "0xc31078cC745daE8f577EdBa2803405CE571cb9f8",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
-  },
-  "ProxyAdminWithoutTimelock": {
-    "address": "0x2945CCC255d31b452Fb4a3F77bd2Ed64A18AbF72",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
+    "address": "0xDF4CBb9A9dDE9Baf21f66E174989bd065d7B4152",
+    "deployer": "0x68e9f64887d634250B4Da6965b6802039Fe89934"
   },
   "BNFT": {
-    "address": "0xe5B57C193f4638E7DefDBB1F0Cc720D4B736ED61",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
+    "address": "0x623c4511e56F7239CCd0070451DF98cFCb4Ef0Ad",
+    "deployer": "0x68e9f64887d634250B4Da6965b6802039Fe89934"
   },
   "BNFTRegistryImpl": {
-    "address": "0xC2778b51D5D620C8e2946A0d8D30e3b09176673c"
+    "address": "0xCDAe0BD1b18b2A68315EDc9b5eF1ac00532204AD"
   },
   "BNFTRegistry": {
-    "address": "0x694b86Deef7C2C06d4C40A07a5995815C444170D",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
+    "address": "0x7853C3c5b7E473b0163f79c2ab85909bbFF69Eca",
+    "deployer": "0x68e9f64887d634250B4Da6965b6802039Fe89934"
   },
-  "BoundPunkGatewayImpl": {
-    "address": "0x3285c31a1aDC8E21E6E6b67bF28a95Bbd1622393"
+  "boundWPUNKS": {
+    "address": "0x60ffe8507747C7E663e3bEc7B3Ba148220074Bef"
   },
-  "BoundPunkGateway": {
-    "address": "0x1c3A772154D640bbc4879cFdB2C8310a9a8D795E",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
+  "boundBAYC": {
+    "address": "0x6F7A0b672f583eF498370b870961ec9348796Cd0"
   },
-  "BAKC": {
-    "address": "0xE8636AFf2F1Cf508988b471d7e221e1B83873FD9",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
+  "boundMAYC": {
+    "address": "0x1f8f0F6726d8d29E5ED866109275bDC9A82B245C"
   },
-  "UserFlashclaimRegistryV3Impl": {
-    "address": "0x773C332D651C60aBe9aDb369970534d017df30e9",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
+  "boundAZUKI": {
+    "address": "0x5e91C16159485aC44351e81E4e9F8b959E0c84c1"
   },
-  "UserFlashclaimRegistryV3": {
-    "address": "0x742cF461228043aA70883608E2841416d666357c",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
+  "CryptoPunksMarket": {
+    "address": "0x17D6f53fba815bAcE0e6921885addAd79add1340",
+    "deployer": "0x68e9f64887d634250B4Da6965b6802039Fe89934"
   },
-  "AirdropFlashLoanReceiverV3Impl": {
-    "address": "0x6267494c5AA96f883467D2c0b2E0C67d43718acC",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
+  "WrappedPunk": {
+    "address": "0xd4B17E11824F3cF0253cE012C8cD6B3300b2FFB5",
+    "deployer": "0x68e9f64887d634250B4Da6965b6802039Fe89934"
   },
-  "AirdropDistributionImpl": {
-    "address": "0xf7Aa08BeF8598B9F264FC3E8E977b8545292CFDb"
+  "cryptoPunksMarket": {
+    "address": "0x17D6f53fba815bAcE0e6921885addAd79add1340",
+    "deployer": "0x68e9f64887d634250B4Da6965b6802039Fe89934"
   },
-  "AirdropDistribution": {
-    "address": "0x59fb4BA8077a86846924C82F084fb8aeE3875df2",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
+  "wrappedPunk": {
+    "address": "0xd4B17E11824F3cF0253cE012C8cD6B3300b2FFB5",
+    "deployer": "0x68e9f64887d634250B4Da6965b6802039Fe89934"
   },
-  "PPG": {
-    "address": "0x4041e6E3B54df2684c5b345d761CF13a1BC219b6",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
+  "MintableERC721": {
+    "address": "0x0afb568334563d4E33a2ed356aA7aCE922cbd3C5",
+    "deployer": "0x68e9f64887d634250B4Da6965b6802039Fe89934"
   },
-  "MIL": {
-    "address": "0xBE4CC856225945ea80460899ff2Fbf0143358550",
-    "deployer": "0xafF5C36642385b6c7Aaf7585eC785aB2316b5db6"
+  "boundMIL": {
+    "address": "0x2B3215bf47795d74CA3870685F11e822d90bdC22"
+  },
+  "boundMBIT": {
+    "address": "0x45a254fB0398f17B56Bd559c3a37777e8d6f012E"
+  },
+  "boundPUDGY": {
+    "address": "0x589bF1D86c5730a7F5426b8B8d83f22163910331"
+  },
+  "boundLILP": {
+    "address": "0x92247A1dFA5D13925DBF450d861558947dD98493"
+  },
+  "boundELEM": {
+    "address": "0x82fc8997BE7E17F03Bd318FEBbF5fF7D8452696a"
+  },
+  "boundBEANZ": {
+    "address": "0x67288bCe1CA2B8691348406E07e15b734bE0C196"
+  },
+  "boundMFER": {
+    "address": "0x90F5674922604E924B14AcbEE0eb89fDBfde07ab"
+  },
+  "boundDOODLE": {
+    "address": "0x93FAAda9A80cA56A6Fb1b6a1AaEF7BB260ccA909"
+  },
+  "boundCOOL": {
+    "address": "0x563fB2df164965D772C70E36e7604C94A45383a4"
+  },
+  "boundNKMGS": {
+    "address": "0x2939e6A39192F8D24158E8DbD3A0Ffa714a56BE0"
+  },
+  "boundRektguy": {
+    "address": "0x78236cc9bD8951ca3Da6E6260CF5D6C01F80715e"
   }
 }

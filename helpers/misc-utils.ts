@@ -3,7 +3,7 @@ import BN = require("bn.js");
 import low from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
 import { Wallet, ContractTransaction } from "ethers";
-import { HardhatRuntimeEnvironment } from "hardhat/types";
+import { HardhatRuntimeEnvironment } from "hardhat/types/runtime";
 import { tEthereumAddress } from "./types";
 import { isAddress } from "ethers/lib/utils";
 import { isZeroAddress } from "ethereumjs-util";

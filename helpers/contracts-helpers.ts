@@ -1,27 +1,23 @@
-import { Contract, Signer, utils, ethers, BigNumberish } from "ethers";
 import { signTypedData_v4 } from "eth-sig-util";
-import { fromRpcSig, ECDSASignature } from "ethereumjs-util";
-import BigNumber from "bignumber.js";
+import { ECDSASignature, fromRpcSig } from "ethereumjs-util";
+import { Contract, Signer, utils } from "ethers";
+import { Artifact } from "hardhat/types";
+import { MintableERC721 } from "../types/MintableERC721";
+import { ConfigNames, loadPoolConfig } from "./configuration";
 import { ZERO_ADDRESS } from "./constants";
-import { getDb, DRE, waitForTx, notFalsyOrZeroAddress } from "./misc-utils";
+import { getDeploySigner } from "./contracts-getters";
+import { verifyEtherscanContract } from "./etherscan-verification";
+import { DRE, getDb, notFalsyOrZeroAddress, waitForTx } from "./misc-utils";
 import {
-  tEthereumAddress,
-  eContractid,
-  tStringTokenSmallUnits,
-  eEthereumNetwork,
   BendPools,
+  eContractid,
+  eEthereumNetwork,
+  eNetwork,
+  iEthereumParamsPerNetwork,
   iParamsPerNetwork,
   iParamsPerPool,
-  eNetwork,
-  iParamsPerNetworkAll,
-  iEthereumParamsPerNetwork,
+  tEthereumAddress
 } from "./types";
-import { MintableERC721 } from "../types/MintableERC721";
-import { Artifact } from "hardhat/types";
-import { verifyEtherscanContract } from "./etherscan-verification";
-import { getDeploySigner } from "./contracts-getters";
-import { ConfigNames, loadPoolConfig } from "./configuration";
-import { string } from "hardhat/internal/core/params/argumentTypes";
 
 export type MockNftMap = { [symbol: string]: MintableERC721 };
 
@@ -169,7 +165,7 @@ export const linkBytecode = (artifact: Artifact, libraries: any) => {
 };
 
 export const getParamPerNetwork = <T>(param: iParamsPerNetwork<T>, network: eNetwork) => {
-  const { main, rinkeby, goerli, sepolia, localhost, hardhat, coverage } = param as iEthereumParamsPerNetwork<T>;
+  const { main, rinkeby, goerli, localhost, hardhat, coverage, sepolia } = param as iEthereumParamsPerNetwork<T>;
   if (process.env.FORK) {
     return param[process.env.FORK as eNetwork] as T;
   }
@@ -181,17 +177,17 @@ export const getParamPerNetwork = <T>(param: iParamsPerNetwork<T>, network: eNet
       return hardhat;
     case eEthereumNetwork.localhost:
       return localhost;
-    case eEthereumNetwork.sepolia:
-      return sepolia;
     case eEthereumNetwork.goerli:
       return goerli;
     case eEthereumNetwork.rinkeby:
       return rinkeby;
     case eEthereumNetwork.main:
       return main;
+    case eEthereumNetwork.sepolia:
+      return sepolia;
+    default:
+      return hardhat;
   }
-
-  return hardhat;
 };
 
 export const getOptionalParamAddressPerNetwork = (

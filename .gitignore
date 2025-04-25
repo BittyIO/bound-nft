@@ -43,3 +43,5 @@ storage_layout
 # Foundry
 cache_forge
 out
+
+*.history
