@@ -48,6 +48,7 @@ contract BNFT is IBNFT, ERC721EnumerableUpgradeable, IERC721ReceiverUpgradeable,
   mapping(uint256 => bool) private _hasDelegateCashes; // obsoleted
   mapping(uint256 => address) private _delegateAddresses; // obsoleted
   bool private _isIgnoreCheckSenderOnRecv;
+  mapping(address => bool) private _flashLaonReceiverWhitelist;
 
   /**
    * @dev Prevents a contract from calling itself, directly or indirectly.
@@ -68,6 +69,11 @@ contract BNFT is IBNFT, ERC721EnumerableUpgradeable, IERC721ReceiverUpgradeable,
     // By storing the original value once again, a refund is triggered (see
     // https://eips.ethereum.org/EIPS/eip-2200)
     _status = _NOT_ENTERED;
+  }
+
+  modifier onlyWhitelistedFlashLoanReceiver(address receiver) {
+    require(_flashLaonReceiverWhitelist[receiver], "BNFT: flash loan receiver not whitelisted");
+    _;
   }
 
   /**
@@ -241,6 +247,10 @@ contract BNFT is IBNFT, ERC721EnumerableUpgradeable, IERC721ReceiverUpgradeable,
     emit Burn(_msgSender(), _underlyingAsset, tokenId, tokenOwner);
   }
 
+  function setFlashLoanReceiverWhitelist(address receiver, bool isWhitelisted) public onlyOwner {
+    _flashLaonReceiverWhitelist[receiver] = isWhitelisted;
+  }
+
   /**
    * @dev See {IBNFT-flashLoan}.
    */
@@ -248,7 +258,7 @@ contract BNFT is IBNFT, ERC721EnumerableUpgradeable, IERC721ReceiverUpgradeable,
     address receiverAddress,
     uint256[] calldata nftTokenIds,
     bytes calldata params
-  ) external override nonReentrant {
+  ) external override nonReentrant onlyWhitelistedFlashLoanReceiver(receiverAddress) {
     uint256 i;
     IFlashLoanReceiver receiver = IFlashLoanReceiver(receiverAddress);
 
