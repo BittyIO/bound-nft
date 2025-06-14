@@ -1,22 +1,21 @@
-import path from "path";
 import fs from "fs";
 import { HardhatUserConfig } from "hardhat/types";
+import path from "path";
 // @ts-ignore
-import { accounts } from "./test-wallets.js";
-import { eEthereumNetwork, eNetwork } from "./helpers/types";
+import { buildForkConfig, NETWORKS_DEFAULT_GAS, NETWORKS_RPC_URL } from "./helper-hardhat-config";
 import { BUIDLEREVM_CHAINID, COVERAGE_CHAINID } from "./helpers/buidler-constants";
-import { NETWORKS_RPC_URL, NETWORKS_DEFAULT_GAS, BLOCK_TO_FORK, buildForkConfig } from "./helper-hardhat-config";
+import { eEthereumNetwork, eNetwork } from "./helpers/types";
+import { accounts } from "./test-wallets.js";
 
 require("dotenv").config();
 
-import "@typechain/hardhat";
-import "@nomiclabs/hardhat-ethers";
-import "@nomiclabs/hardhat-waffle";
 import "@nomicfoundation/hardhat-verify";
+import "@nomiclabs/hardhat-ethers";
+import "@nomiclabs/hardhat-solhint";
+import "@nomiclabs/hardhat-waffle";
+import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
-import { fork } from "child_process";
-import "@nomiclabs/hardhat-solhint";
 require("hardhat-storage-layout-diff");
 
 const SKIP_LOAD = process.env.SKIP_LOAD === "true";
@@ -105,8 +104,6 @@ const buidlerConfig: HardhatUserConfig = {
       accounts: accounts.map(({ secretKey, balance }: { secretKey: string; balance: string }) => secretKey),
     },
     sepolia: getCommonNetworkConfig(eEthereumNetwork.sepolia, 11155111),
-    goerli: getCommonNetworkConfig(eEthereumNetwork.goerli, 5),
-    rinkeby: getCommonNetworkConfig(eEthereumNetwork.rinkeby, 4),
     main: getCommonNetworkConfig(eEthereumNetwork.main, 1),
     hardhat: {
       hardfork: "berlin",
