@@ -202,3 +202,52 @@ task("sepolia:deploy-mock-cryptoPunks", "Deploy mock CryptoPunks")
   });
 
 export const getContractAddressFromDB = (id: string) => getDb(DRE.network.name).get(id).value().address;
+
+
+task("sepolia:transferOwnership", "Transfer ownership of proxy admin to new address")
+  .addParam("newOwner", "New owner address")
+  .setAction(async ({ newOwner }, DRE) => {
+    await DRE.run("set-DRE");
+    await DRE.run("compile");
+
+    const bnftRegistryProxy: BNFTRegistry = await getBNFTRegistryProxy();
+    await bnftRegistryProxy.setClaimAdmin(newOwner);
+    await bnftRegistryProxy.transferOwnership(newOwner);
+
+    const boundWPUNKS = await getBNFT(getContractAddressFromDB('boundWPUNKS'));
+    await boundWPUNKS.setClaimAdmin(newOwner);
+    await boundWPUNKS.transferOwnership(newOwner);
+    console.log('boundWPUNKS done');
+    const boundBAYC = await getBNFT(getContractAddressFromDB('boundBAYC'));
+    await boundBAYC.setClaimAdmin(newOwner);
+    await boundBAYC.transferOwnership(newOwner);
+    console.log('boundBAYC done');
+    const boundMAYC = await getBNFT(getContractAddressFromDB('boundMAYC'));
+    await boundMAYC.setClaimAdmin(newOwner);
+    await boundMAYC.transferOwnership(newOwner);
+    console.log('boundMAYC done');
+    const boundAZUKI = await getBNFT(getContractAddressFromDB('boundAZUKI'));
+    await boundAZUKI.setClaimAdmin(newOwner);
+    await boundAZUKI.transferOwnership(newOwner);
+    console.log('boundAZUKI done');
+    const boundMEEBITS = await getBNFT(getContractAddressFromDB('boundMEEBITS'));
+    await boundMEEBITS.setClaimAdmin(newOwner);
+    await boundMEEBITS.transferOwnership(newOwner);
+    console.log('boundMEEBITS done');
+    const boundMIL = await getBNFT(getContractAddressFromDB('boundMIL'));
+    await boundMIL.setClaimAdmin(newOwner);
+    await boundMIL.transferOwnership(newOwner);
+    console.log('boundMIL done');
+    const boundPUDGY = await getBNFT(getContractAddressFromDB('boundPUDGY'));
+    await boundPUDGY.setClaimAdmin(newOwner);
+    await boundPUDGY.transferOwnership(newOwner);
+    console.log('boundPUDGY done');
+    const boundMFER = await getBNFT(getContractAddressFromDB('boundMFER'));
+    await boundMFER.setClaimAdmin(newOwner);
+    await boundMFER.transferOwnership(newOwner);
+    console.log('boundMFER done');
+    const boundLILP = await getBNFT(getContractAddressFromDB('boundLILP'));
+    await boundLILP.setClaimAdmin(newOwner);
+    await boundLILP.transferOwnership(newOwner);
+    console.log('boundLILP done');
+  });
