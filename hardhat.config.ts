@@ -17,6 +17,7 @@ import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 require("hardhat-storage-layout-diff");
+import "hardhat-abi-exporter";
 
 const SKIP_LOAD = process.env.SKIP_LOAD === "true";
 const DEFAULT_BLOCK_GAS_LIMIT = 12450000;
@@ -52,14 +53,22 @@ const getCommonNetworkConfig = (networkName: eNetwork, networkId: number) => ({
   accounts: PRIVATE_KEY
     ? [PRIVATE_KEY]
     : {
-        mnemonic: MNEMONIC,
-        path: MNEMONIC_PATH,
-        initialIndex: 0,
-        count: 20,
-      },
+      mnemonic: MNEMONIC,
+      path: MNEMONIC_PATH,
+      initialIndex: 0,
+      count: 20,
+    },
 });
 
 const buidlerConfig: HardhatUserConfig = {
+  abiExporter: {
+    path: "./abis",
+    runOnCompile: true,
+    clear: true,
+    flat: true,
+    pretty: false,
+    except: ["test*", "@openzeppelin*", "Mock*", "Test*", "mock*"],
+  },
   solidity: {
     compilers: [
       {

@@ -1,6 +1,13 @@
 import { BytesLike } from "ethers";
 import { task } from "hardhat/config";
-import { deployBNFTProxyAdmin, deployBNFTRegistry, deployCryptoPunksMarket, deployGenericBNFTImpl, deployMintableERC721, deployWrappedPunk } from "../../helpers/contracts-deployments";
+import {
+  deployBNFTProxyAdmin,
+  deployBNFTRegistry,
+  deployCryptoPunksMarket,
+  deployGenericBNFTImpl,
+  deployMintableERC721,
+  deployWrappedPunk
+} from "../../helpers/contracts-deployments";
 import {
   getBNFT,
   getBNFTProxyAdminById,
