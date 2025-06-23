@@ -165,6 +165,8 @@ interface IBNFT {
 
   function setDelegateCashForTokenV2(uint256[] calldata tokenIds, bool value) external;
 
+  function setFlashLoanReceiverWhitelist(address receiver, bool isWhitelisted) external;
+
   function setDelegateCashForTokenV2(
     address delegate,
     uint256[] calldata tokenIds,

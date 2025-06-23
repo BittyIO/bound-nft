@@ -1,6 +1,13 @@
 import { BytesLike } from "ethers";
 import { task } from "hardhat/config";
-import { deployBNFTProxyAdmin, deployBNFTRegistry, deployCryptoPunksMarket, deployGenericBNFTImpl, deployMintableERC721, deployWrappedPunk } from "../../helpers/contracts-deployments";
+import {
+  deployBNFTProxyAdmin,
+  deployBNFTRegistry,
+  deployCryptoPunksMarket,
+  deployGenericBNFTImpl,
+  deployMintableERC721,
+  deployWrappedPunk
+} from "../../helpers/contracts-deployments";
 import {
   getBNFT,
   getBNFTProxyAdminById,
@@ -22,18 +29,18 @@ import retry from "async-retry";
 import { BNFTConfigs, NftAssets } from "./config";
 
 
-task("sepolia:deploy-all", "Deploy all contract")
+task("deploy:deploy-all", "Deploy all contract")
   .addFlag("verify", "Verify contracts at Etherscan")
   .setAction(async ({ verify }, { run }) => {
     await run("set-DRE");
     await run("compile");
-    await run("sepolia:deploy-proxy-admin", { verify });
-    await run("sepolia:deploy-bnft-registry", { verify });
-    await run("sepolia:deploy-bnft-tokens", { verify });
+    await run("deploy:deploy-proxy-admin", { verify });
+    await run("deploy:deploy-bnft-registry", { verify });
+    await run("deploy:deploy-bnft-tokens", { verify });
 
   });
 
-task("sepolia:deploy-proxy-admin", "Deploy proxy admin contract")
+task("deploy:deploy-proxy-admin", "Deploy proxy admin contract")
   .addFlag("verify", "Verify contracts at Etherscan")
   .setAction(async ({ verify }, DRE) => {
     await DRE.run("set-DRE");
@@ -42,7 +49,7 @@ task("sepolia:deploy-proxy-admin", "Deploy proxy admin contract")
   });
 
 
-task("sepolia:deploy-bnft-registry", "Deploy bnft registry")
+task("deploy:deploy-bnft-registry", "Deploy bnft registry")
   .addFlag("verify", "Verify contracts at Etherscan")
   .setAction(async ({ verify }, localBRE) => {
     await localBRE.run("set-DRE");
@@ -66,7 +73,7 @@ task("sepolia:deploy-bnft-registry", "Deploy bnft registry")
     await deployBNFTUpgradeableProxy(proxyAdmin.address, bnftRegistryImpl.address, initEncodedData, verify);
   });
 
-task("sepolia:deploy-new-bnft-impl", "Deploy new bnft implementation")
+task("deploy:deploy-new-bnft-impl", "Deploy new bnft implementation")
   .addFlag("verify", "Verify contracts at Etherscan")
   .setAction(async ({ verify }, localBRE) => {
     await localBRE.run("set-DRE");
@@ -74,7 +81,7 @@ task("sepolia:deploy-new-bnft-impl", "Deploy new bnft implementation")
     await deployGenericBNFTImpl(verify);
   });
 
-task("sepolia:bnft-registry-set-impl", "Set bnft registry implementation")
+task("deploy:bnft-registry-set-impl", "Set bnft registry implementation")
   .setAction(async ({ }, localBRE) => {
     await localBRE.run("set-DRE");
     await localBRE.run("compile");
@@ -82,7 +89,7 @@ task("sepolia:bnft-registry-set-impl", "Set bnft registry implementation")
     await bnftRegistryProxy.setBNFTGenericImpl(getContractAddressFromDB('BNFT'));
   });
 
-task("sepolia:bnft-registry-upgrade-all", "Upgrade all bnft registry")
+task("deploy:bnft-registry-upgrade-all", "Upgrade all bnft registry")
   .setAction(async ({ }, localBRE) => {
     await localBRE.run("set-DRE");
     await localBRE.run("compile");
@@ -109,7 +116,7 @@ export const deployBNFTUpgradeableProxy = async (
   }
 };
 
-task("sepolia:punk-transferOwnership", "")
+task("deploy:punk-transferOwnership", "")
   .setAction(async ({ }, DRE) => {
     await DRE.run("set-DRE");
     await DRE.run("compile");
@@ -117,7 +124,7 @@ task("sepolia:punk-transferOwnership", "")
     await cryptoPunksMarket.transferOwnership('0x7405172094eC22d313e2D239Feb8aE69be030bd1');
   });
 
-task("sepolia:deploy-bnft-tokens", "Deploy bnft tokens for full enviroment")
+task("deploy:deploy-bnft-tokens", "Deploy bnft tokens for full enviroment")
   .addFlag("verify", "Verify contracts at Etherscan")
   .setAction(async ({ }, DRE) => {
     await DRE.run("set-DRE");
@@ -178,7 +185,7 @@ task("verify:Contract", "verify contract")
     await verifyEtherscanContract(address, args, contract);
   });
 
-task("sepolia:deploy-mock-nfts", "Deploy mock nfts for dev enviroment")
+task("deploy:deploy-mock-nfts", "Deploy mock nfts for dev enviroment")
   .addFlag("verify", "Verify contracts at Etherscan")
   .setAction(async ({ verify }, localBRE) => {
     await localBRE.run("set-DRE");
@@ -189,7 +196,7 @@ task("sepolia:deploy-mock-nfts", "Deploy mock nfts for dev enviroment")
       await registerContractInJsonDb(tokenSymbol.toUpperCase(), token);
     }
   });
-task("sepolia:deploy-mock-cryptoPunks", "Deploy mock CryptoPunks")
+task("deploy:deploy-mock-cryptoPunks", "Deploy mock CryptoPunks")
   .addFlag("verify", "Verify contracts at Etherscan")
   .setAction(async ({ verify }, localBRE) => {
     await localBRE.run("set-DRE");
@@ -202,3 +209,52 @@ task("sepolia:deploy-mock-cryptoPunks", "Deploy mock CryptoPunks")
   });
 
 export const getContractAddressFromDB = (id: string) => getDb(DRE.network.name).get(id).value().address;
+
+
+task("deploy:transferOwnership", "Transfer ownership of proxy admin to new address")
+  .addParam("newOwner", "New owner address")
+  .setAction(async ({ newOwner }, DRE) => {
+    await DRE.run("set-DRE");
+    await DRE.run("compile");
+
+    const bnftRegistryProxy: BNFTRegistry = await getBNFTRegistryProxy();
+    await bnftRegistryProxy.setClaimAdmin(newOwner);
+    await bnftRegistryProxy.transferOwnership(newOwner);
+
+    const boundWPUNKS = await getBNFT(getContractAddressFromDB('boundWPUNKS'));
+    await boundWPUNKS.setClaimAdmin(newOwner);
+    await boundWPUNKS.transferOwnership(newOwner);
+    console.log('boundWPUNKS done');
+    const boundBAYC = await getBNFT(getContractAddressFromDB('boundBAYC'));
+    await boundBAYC.setClaimAdmin(newOwner);
+    await boundBAYC.transferOwnership(newOwner);
+    console.log('boundBAYC done');
+    const boundMAYC = await getBNFT(getContractAddressFromDB('boundMAYC'));
+    await boundMAYC.setClaimAdmin(newOwner);
+    await boundMAYC.transferOwnership(newOwner);
+    console.log('boundMAYC done');
+    const boundAZUKI = await getBNFT(getContractAddressFromDB('boundAZUKI'));
+    await boundAZUKI.setClaimAdmin(newOwner);
+    await boundAZUKI.transferOwnership(newOwner);
+    console.log('boundAZUKI done');
+    const boundMEEBITS = await getBNFT(getContractAddressFromDB('boundMEEBITS'));
+    await boundMEEBITS.setClaimAdmin(newOwner);
+    await boundMEEBITS.transferOwnership(newOwner);
+    console.log('boundMEEBITS done');
+    const boundMIL = await getBNFT(getContractAddressFromDB('boundMIL'));
+    await boundMIL.setClaimAdmin(newOwner);
+    await boundMIL.transferOwnership(newOwner);
+    console.log('boundMIL done');
+    const boundPUDGY = await getBNFT(getContractAddressFromDB('boundPUDGY'));
+    await boundPUDGY.setClaimAdmin(newOwner);
+    await boundPUDGY.transferOwnership(newOwner);
+    console.log('boundPUDGY done');
+    const boundMFER = await getBNFT(getContractAddressFromDB('boundMFER'));
+    await boundMFER.setClaimAdmin(newOwner);
+    await boundMFER.transferOwnership(newOwner);
+    console.log('boundMFER done');
+    const boundLILP = await getBNFT(getContractAddressFromDB('boundLILP'));
+    await boundLILP.setClaimAdmin(newOwner);
+    await boundLILP.transferOwnership(newOwner);
+    console.log('boundLILP done');
+  });

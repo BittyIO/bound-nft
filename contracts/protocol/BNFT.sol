@@ -247,7 +247,7 @@ contract BNFT is IBNFT, ERC721EnumerableUpgradeable, IERC721ReceiverUpgradeable,
     emit Burn(_msgSender(), _underlyingAsset, tokenId, tokenOwner);
   }
 
-  function setFlashLoanReceiverWhitelist(address receiver, bool isWhitelisted) public onlyOwner {
+  function setFlashLoanReceiverWhitelist(address receiver, bool isWhitelisted) external override onlyOwner {
     _flashLaonReceiverWhitelist[receiver] = isWhitelisted;
   }
 
