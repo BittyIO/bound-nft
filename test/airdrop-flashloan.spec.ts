@@ -1,15 +1,14 @@
-import { TestEnv, makeSuite } from "./helpers/make-suite";
-import { MockBNFTMinter } from "../types/MockBNFTMinter";
+import { ethers } from "ethers";
 import {
   deployAirdropFlashLoanReceiver,
   deployMockAirdrop,
-  deployMockBNFTMinter,
-  deployMockFlashLoanReceiver,
+  deployMockBNFTMinter
 } from "../helpers/contracts-deployments";
-import { AirdropFlashLoanReceiver, MockAirdropProject } from "../types";
 import { getMintableERC1155, getMintableERC20, getMintableERC721 } from "../helpers/contracts-getters";
-import { ethers } from "ethers";
 import { waitForTx } from "../helpers/misc-utils";
+import { AirdropFlashLoanReceiver, MockAirdropProject } from "../types";
+import { MockBNFTMinter } from "../types/MockBNFTMinter";
+import { TestEnv, makeSuite } from "./helpers/make-suite";
 
 const { expect } = require("chai");
 
@@ -26,6 +25,7 @@ makeSuite("Airdrop: FlashLoan", (testEnv: TestEnv) => {
       bnftRegistry.address,
       "0"
     );
+    await waitForTx(await bBAYC.setFlashLoanReceiverWhitelist(_airdropFlashLoanReceiver.address, true));
     _mockAirdropProject = await deployMockAirdrop([bnftRegistry.address]);
     _mockBNFTMinter = await deployMockBNFTMinter([bayc.address, bBAYC.address]);
   });

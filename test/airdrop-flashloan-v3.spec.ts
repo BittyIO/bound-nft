@@ -31,6 +31,7 @@ makeSuite("Airdrop: FlashLoan V3", (testEnv: TestEnv) => {
 
     _airdropFlashLoanReceiver = await new AirdropFlashLoanReceiverV3Factory(testEnv.deployer.signer).deploy();
     await waitForTx(await _airdropFlashLoanReceiver.initialize(testEnv.users[0].address, bnftRegistry.address));
+    await waitForTx(await bBAYC.setFlashLoanReceiverWhitelist(_airdropFlashLoanReceiver.address, true));
 
     _mockAirdropProject = await deployMockAirdrop([bnftRegistry.address]);
     _mockBNFTMinter = await deployMockBNFTMinter([bayc.address, bBAYC.address]);

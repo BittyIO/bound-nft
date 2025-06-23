@@ -21,6 +21,7 @@ makeSuite("BNFT: FlashLoan function", (testEnv: TestEnv) => {
     _mockFlashLoanReceiver = await deployMockFlashLoanReceiver([bnftRegistry.address]);
     _mockBNFTMinter = await deployMockBNFTMinter([bayc.address, bBAYC.address]);
     _mockBNFTMinter2 = await deployMockBNFTMinter([bayc.address, bBAYC.address]);
+    await waitForTx(await bBAYC.setFlashLoanReceiverWhitelist(_mockFlashLoanReceiver.address, true));
   });
 
   afterEach(async () => {

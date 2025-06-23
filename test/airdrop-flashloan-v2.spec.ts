@@ -7,7 +7,6 @@ import {
 } from "../helpers/contracts-deployments";
 import { AirdropFlashLoanReceiverV2, MockAirdropProject } from "../types";
 import { getMintableERC1155, getMintableERC20, getMintableERC721 } from "../helpers/contracts-getters";
-import { ethers } from "ethers";
 import { waitForTx } from "../helpers/misc-utils";
 
 const { expect } = require("chai");
@@ -28,9 +27,11 @@ makeSuite("Airdrop: FlashLoan V2", (testEnv: TestEnv) => {
 
     _mockAirdropProject = await deployMockAirdrop([bnftRegistry.address]);
     _mockBNFTMinter = await deployMockBNFTMinter([bayc.address, bBAYC.address]);
+
+    await waitForTx(await bBAYC.setFlashLoanReceiverWhitelist(_airdropFlashLoanReceiver.address, true));
   });
 
-  afterEach(async () => {});
+  afterEach(async () => { });
 
   it("Apply airdrop using flashLoan - ERC20/ERC721/ERC1155", async () => {
     const { users, bayc, bBAYC, bnftRegistry } = testEnv;
@@ -68,9 +69,12 @@ makeSuite("Airdrop: FlashLoan V2", (testEnv: TestEnv) => {
     );
     console.log("receiverEncodedData:", receiverEncodedData);
 
+    console.log("flashLoan start");
     await waitForTx(
       await bBAYC.connect(nftOwner.signer).flashLoan(_airdropFlashLoanReceiver.address, [tokenId], receiverEncodedData)
     );
+    console.log("flashLoan end");
+
 
     console.log("Airdrop ERC20 Balance:", await mockAirdropERC20Token.balanceOf(nftOwner.address));
     console.log("Airdrop ERC721 Balance:", await mockAirdropERC721Token.balanceOf(nftOwner.address));
