@@ -1,15 +1,15 @@
 [![Build pass](https://github.com/BittyIO/bound-nft/actions/workflows/node.js.yml/badge.svg)](https://github.com/BittyIO/bound-nft/actions/workflows/node.js.yml)
 
 ## Thanks
-Bitty lending protocol fork from [boundnft-protocol](https://github.com/BendDAO/boundnft-protocol)
+bound-nft fork from [boundnft-protocol](https://github.com/BendDAO/boundnft-protocol)
 Thanks BendDAO for the opensouce spirit & code.
 
 ## Setup
-Create an enviroment file named `.**env**` and fill the next enviroment variables
+Create an enviroment file named `.env` and fill the next enviroment variables
 
 ```
-# Mnemonic, only first address will be used
-MNEMONIC=""
+# private key for deoployer
+PRIVATE_KEY=""
 
 # Add Alchemy or Infura provider keys, alchemy takes preference at the config level
 ALCHEMY_KEY=""
