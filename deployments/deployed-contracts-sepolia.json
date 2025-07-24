@@ -78,5 +78,14 @@
   },
   "boundRektguy": {
     "address": "0x78236cc9bD8951ca3Da6E6260CF5D6C01F80715e"
+  },
+  "boundMEEBITS": {
+    "address": "0x45a254fB0398f17B56Bd559c3a37777e8d6f012E"
+  },
+  "boundTEST": {
+    "address": "0x286F8b0379B7B2D1068AeE619B9ADB921d9326ed"
+  },
+  "boundMOONBIRD": {
+    "address": "0x0C618602eAee3a46B6e741Aec50038C83079c23c"
   }
 }
