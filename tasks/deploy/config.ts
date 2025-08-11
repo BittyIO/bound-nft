@@ -60,5 +60,8 @@ export const NftAssets: Params<Record<string, string>> = {
     PUDGY: '0xbd3531da5cf5857e7cfaa92426877b022e612cf8',
     MFER: '0x79fcdef22feed20eddacbb2587640e45491b757f',
     LILP: '0x524cab2ec69124574082676e6f654a18df49a048',
+    DOODLE: '0x8a90cab2b38dba80c64b7734e58ee1db38b8992e',
+    MOONBIRD: '0x23581767a106ae21c074b2276d25e5c3e136a68b',
+    MOONCATS: "0xc3f733ca98E0daD0386979Eb96fb1722A1A05E69"
   },
 };
