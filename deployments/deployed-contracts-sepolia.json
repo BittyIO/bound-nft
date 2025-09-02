@@ -43,7 +43,7 @@
     "deployer": "0x68e9f64887d634250B4Da6965b6802039Fe89934"
   },
   "MintableERC721": {
-    "address": "0x0afb568334563d4E33a2ed356aA7aCE922cbd3C5",
+    "address": "0xFe8653c16289515555879eEc69d9D22148DC9eB7",
     "deployer": "0x68e9f64887d634250B4Da6965b6802039Fe89934"
   },
   "boundMIL": {
@@ -87,5 +87,12 @@
   },
   "boundMOONBIRD": {
     "address": "0x0C618602eAee3a46B6e741Aec50038C83079c23c"
+  },
+  "MYTHICS": {
+    "address": "0xFe8653c16289515555879eEc69d9D22148DC9eB7",
+    "deployer": "0x68e9f64887d634250B4Da6965b6802039Fe89934"
+  },
+  "boundMYTHICS": {
+    "address": "0x93D0f24026AE5cc1EA7B0cF7fB31Af39BECa3666"
   }
 }

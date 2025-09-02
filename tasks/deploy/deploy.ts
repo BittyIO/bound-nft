@@ -190,7 +190,7 @@ task("deploy:deploy-mock-nfts", "Deploy mock nfts for dev enviroment")
   .setAction(async ({ verify }, localBRE) => {
     await localBRE.run("set-DRE");
     await localBRE.run("compile");
-    for (const tokenSymbol of ["MIL", "MBIT", "PUDGY", "LILP", "ELEM", "BEANZ", "MFER", "DOODLE", "COOL", "NKMGS", "Rektguy"]) {
+    for (const tokenSymbol of ["Mythics"]) {
       const tokenName = "BendDAO Mock " + tokenSymbol;
       const token = await deployMintableERC721([tokenName, tokenSymbol], verify);
       await registerContractInJsonDb(tokenSymbol.toUpperCase(), token);
